@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'core/config/google_auth_config.dart';
+import 'ui/core/theme/app_theme.dart';
+import 'ui/features/auth/views/login_view.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeGoogleSignIn();
 
   await Supabase.initialize(
     url: 'https://tmpkcnpmcuksbgyluoeo.supabase.co',
@@ -19,19 +25,10 @@ class BarberBlackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            'BarberBlack',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
+      theme: AppTheme.light,
+      home: const LoginView(),
     );
   }
 }
